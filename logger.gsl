@@ -1,0 +1,43 @@
+.template 0
+
+function global.logger__log(msg, ctx)  
+  if defined(my.ctx)
+    echo "[$(global.logcnt:)][$(my.ctx:)] $(my.msg:)"
+  else
+    echo "[$(global.logcnt:)] $(my.msg:)"
+  endif
+endfunction
+
+function global.log(msg, ctx)
+  logger__log(my.msg, my.ctx)
+endfunction
+
+function global.logger__debug(msg, ctx)
+  if !global.debug
+    return
+  endif
+  if defined(my.ctx)
+    echo "[$(global.logcnt:)][$(my.ctx:)][debug] $(my.msg:)"
+  else
+    echo "[$(global.logcnt:)][debug] $(my.msg:)"
+  endif
+endfunction
+
+function global.debug(msg, ctx)
+  logger__debug(my.msg, my.ctx)
+endfunction
+
+function global.logger__error(msg, ctx)
+  if defined(my.ctx)
+    abort "[$(global.logcnt:)][$(my.ctx:)][error] $(my.msg:)"
+  else
+    abort "[$(global.logcnt:)][error] $(my.msg:)"
+  endif
+endfunction
+
+function global.error(msg, ctx)
+  logger__error(my.msg, my.ctx)
+endfunction
+
+
+.endtemplate

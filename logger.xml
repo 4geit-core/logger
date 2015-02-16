@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<core name="logger" version="0.1.0">
+  <function name="log"/>
+  <function name="debug"/>
+  <function name="error"/>
+</core>
