@@ -12,14 +12,22 @@ function global.log(msg, ctx)
   logger__log(my.msg, my.ctx)
 endfunction
 
-function global.logger__debug(msg, ctx)
+function debug_func(msg, ctx)
   if !global.debug
     return
   endif
   if defined(my.ctx)
-    echo "[$(global.logcnt:)][$(my.ctx:)][debug] $(my.msg:)"
+    echo "[debug][$(global.logcnt:)][$(my.ctx:)] $(my.msg:)"
   else
-    echo "[$(global.logcnt:)][debug] $(my.msg:)"
+    echo "[debug][$(global.logcnt:)] $(my.msg:)"
+  endif
+endfunction
+
+function global.logger__debug(msg, ctx)
+  if !defined(pn)
+    debug_func(my.msg, my.ctx)
+  elsif defined(pn.debug) & pn.debug = "True"
+    debug_func(my.msg, my.ctx)
   endif
 endfunction
 
@@ -29,16 +37,17 @@ endfunction
 
 function global.logger__error(msg, ctx)
   root.save('$(build_path:)/error.xml')
+  cleanup()
+  root.save('$(build_path:)/error_clean.xml')
   if defined(my.ctx)
-    abort "[$(global.logcnt:)][$(my.ctx:)][error] $(my.msg:)"
+    abort "[error][$(global.logcnt:)][$(my.ctx:)] $(my.msg:)"
   else
-    abort "[$(global.logcnt:)][error] $(my.msg:)"
+    abort "[error][$(global.logcnt:)] $(my.msg:)"
   endif
 endfunction
 
 function global.error(msg, ctx)
   logger__error(my.msg, my.ctx)
 endfunction
-
 
 .endtemplate
