@@ -36,9 +36,7 @@ function global.debug(msg, ctx)
 endfunction
 
 function global.logger__error(msg, ctx)
-  root.save('$(build_path:)/error.xml')
-  cleanup()
-  root.save('$(build_path:)/error_clean.xml')
+  save_debug()
   if defined(my.ctx)
     abort "[error][$(global.logcnt:)][$(my.ctx:)] $(my.msg:)"
   else
