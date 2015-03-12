@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<core name="logger" branch="master">
+<core name="logger" branch="master" description="4i core library handling logging functions">
   <function name="log"/>
   <function name="debug"/>
   <function name="error"/>
