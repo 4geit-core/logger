@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 
 <core name="logger" branch="master" description="4i core library handling logging functions">
-  <function name="log"/>
-  <function name="debug"/>
-  <function name="error"/>
+  <function name="log" description="display a message"/>
+  <function name="debug" description="display a debug message"/>
+  <function name="raw_error" description="raise an error message"/>
+  <function name="error" description="raise an error message + generate current state of the memory (AST)"/>
 </core>

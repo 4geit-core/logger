@@ -52,13 +52,21 @@ function global.debug(msg, ctx)
   logger__debug(my.msg, my.ctx)
 endfunction
 
-function global.logger__error(msg, ctx)
-  save_debug()
+function global.logger__raw_error(msg, ctx)
   if defined(my.ctx)
     abort "[error][$(global.logcnt:)][$(my.ctx:)] $(my.msg:)"
   else
     abort "[error][$(global.logcnt:)] $(my.msg:)"
   endif
+endfunction
+
+function global.raw_error(msg, ctx)
+  logger__raw_error(my.msg, my.ctx)
+endfunction
+
+function global.logger__error(msg, ctx)
+  save_debug()
+  raw_error(my.msg, my.ctx)
 endfunction
 
 function global.error(msg, ctx)
